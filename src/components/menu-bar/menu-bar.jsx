@@ -93,7 +93,7 @@ import linkSocketIcon from './icon--link-socket.svg'; // eslint-disable-line no-
 import communityIcon from './icon--community.svg';
 import wikiIcon from './icon--wiki.svg';
 
-import scratchLogo from './scratch-logo.svg';
+import scratchLogo from './scratch-logo.png';
 
 import sharedMessages from '../../lib/shared-messages';
 
@@ -531,11 +531,12 @@ class MenuBar extends React.Component {
                         <img
                             alt="OpenBlock"
                             className={classNames(styles.scratchLogo, {
-                                [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
+                                // [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
+                                [styles.clickable]:false
                             })}
                             draggable={false}
                             src={this.props.logo}
-                            onClick={this.props.onClickLogo}
+                            // onClick={this.props.onClickLogo}
                         />
                     </div>
                     {(this.props.canChangeLanguage) && (<div

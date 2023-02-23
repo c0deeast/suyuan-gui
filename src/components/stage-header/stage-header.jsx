@@ -18,7 +18,7 @@ import unFullScreenIcon from './icon--unfullscreen.svg';
 
 import signalIcon from './icon--signal.svg';
 
-import scratchLogo from '../menu-bar/scratch-logo.svg';
+import scratchLogo from '../menu-bar/scratch-logo.png';
 import styles from './stage-header.css';
 
 const messages = defineMessages({
@@ -70,7 +70,7 @@ const StageHeaderComponent = function (props) {
         const stageDimensions = getStageDimensions(null, true);
         const stageButton = showBranding ? (
             <div className={styles.embedScratchLogo}>
-                <a
+                {/* <a
                     href="https://openblock.cc"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -79,7 +79,11 @@ const StageHeaderComponent = function (props) {
                         alt="OpenBlock"
                         src={scratchLogo}
                     />
-                </a>
+                </a> */}
+                <img
+                        alt="OpenBlock"
+                        src={scratchLogo}
+                    />
             </div>
         ) : (
             <Button
