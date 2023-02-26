@@ -728,7 +728,7 @@ class MenuBar extends React.Component {
                         />
                     </div>*/}
                 </div>
-                <div className={styles.fileMenu}>
+                {/* <div className={styles.fileMenu}>
                     {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
@@ -762,9 +762,9 @@ class MenuBar extends React.Component {
                             </div>
                         )}</SB3Downloader>
                     )}
-                </div>
+                </div> */}
                 <div className={styles.tailMenu}>
-                    <div
+                    {/* <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.community)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onClick={this.handleClickOpenCommunity}
@@ -774,8 +774,8 @@ class MenuBar extends React.Component {
                             src={communityIcon}
                         />
                         <FormattedMessage {...ariaMessages.community} />
-                    </div>
-                    <div
+                    </div> */}
+                    {/* <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.wiki)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onClick={this.handleClickOpenWiki}
@@ -785,7 +785,7 @@ class MenuBar extends React.Component {
                             src={wikiIcon}
                         />
                         <FormattedMessage {...ariaMessages.wiki} />
-                    </div>
+                    </div> */}
                     <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
