@@ -44,7 +44,7 @@ const messages = defineMessages({
         id: 'gui.telemetryOptIn.optInTooltip'
     },
     optOutText: {
-        defaultMessage: 'Do not share my usage data with the Openblock Team',
+        defaultMessage: 'Do not share my usage data with the Openblock Team and i am your father',
         description: 'Text for telemetry modal opt-in button',
         id: 'gui.telemetryOptIn.optOutText'
     },

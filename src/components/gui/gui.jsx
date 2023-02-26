@@ -179,6 +179,7 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
+                {/* 取消弹窗
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}
@@ -189,7 +190,7 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseTelemetryModal}
                         onShowPrivacyPolicy={onShowPrivacyPolicy}
                     />
-                ) : null}
+                ) : null} */}
                 {loading ? (
                     <Loader />
                 ) : null}
