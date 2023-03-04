@@ -435,16 +435,24 @@ class MenuBar extends React.Component {
         // assume it's an array of objects
         // each item must have a 'title' FormattedMessage and a 'handleClick' function
         // generate a menu with items for each object in the array
+        // 暂时去掉许可证
         return (
-            onClickAbout.map(itemProps => (
-                <MenuItem
-                    key={itemProps.title}
-                    isRtl={this.props.isRtl}
-                    onClick={this.wrapAboutMenuCallback(itemProps.onClick)}
-                >
-                    {itemProps.title}
-                </MenuItem>
-            ))
+            onClickAbout.map(itemProps => {
+                return (
+                    <>
+                        {
+                            itemProps.title.props.defaultMessage !== "License" ?
+                                <MenuItem
+                                    key={itemProps.title}
+                                    isRtl={this.props.isRtl}
+                                    onClick={this.wrapAboutMenuCallback(itemProps.onClick)}
+                                >
+                                    {itemProps.title}
+                                </MenuItem> : null
+                        }
+                    </>
+                )
+            })
         );
     }
     wrapAboutMenuCallback (callback) {
