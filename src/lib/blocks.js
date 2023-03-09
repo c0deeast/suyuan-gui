@@ -1,4 +1,4 @@
-import ScratchBlocks from 'openblock-blocks';
+import ScratchBlocks from 'suyuan-blocks';
 import iconv from 'iconv-lite';
 
 /**
