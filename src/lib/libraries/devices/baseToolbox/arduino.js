@@ -368,6 +368,7 @@ const events = function (isInitialSetup, isStage, targetId, isRealtimeMode) {
             </block>
         ` : `
             <block type="event_whenarduinobegin"/>
+            <block type="event_whenesp32begin"/>
         `}
         ${categorySeparator}
     </category>
