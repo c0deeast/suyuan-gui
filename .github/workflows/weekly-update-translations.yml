@@ -30,8 +30,8 @@ jobs:
 
       - run: npm ci
 
-      - name: Update openblock-l10n
-        run: npm i --save openblock-l10n@latest
+      - name: Update suyuan-l10n
+        run: npm i --save suyuan-l10n@latest
 
       - name: Check for modified files
         id: git-check

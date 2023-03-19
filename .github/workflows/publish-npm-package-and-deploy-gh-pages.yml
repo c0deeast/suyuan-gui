@@ -84,9 +84,9 @@ jobs:
     #         npm run i18n:src
     #         npm run i18n:push
 
-      - name: Update openblock-l10n
+      - name: Update suyuan-l10n
         if: ${{ github.ref == 'refs/heads/main' }}
-        run: npm i --save openblock-l10n@latest
+        run: npm i --save suyuan-l10n@latest
 
       - name: Check for modified files
         if: ${{ github.ref == 'refs/heads/main' }}

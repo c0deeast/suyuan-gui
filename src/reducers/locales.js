@@ -1,7 +1,7 @@
 import {addLocaleData} from 'react-intl';
 
-import {localeData, isRtl} from 'openblock-l10n';
-import editorMessages from 'openblock-l10n/locales/editor-msgs';
+import {localeData, isRtl} from 'suyuan-l10n';
+import editorMessages from 'suyuan-l10n/locales/editor-msgs';
 
 addLocaleData(localeData);
 

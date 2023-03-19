@@ -368,7 +368,7 @@ const events = function (isInitialSetup, isStage, targetId, isRealtimeMode) {
             </block>
         ` : `
             <block type="event_whenarduinobegin"/>
-            <block type="event_whenesp32begin"/>
+            <block type="event_whenrobotbegin"/>
         `}
         ${categorySeparator}
     </category>
