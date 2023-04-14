@@ -108,7 +108,6 @@ class ActionMenu extends React.Component {
             tooltipPlace,
             onClick
         } = this.props;
-
         return (
             <div
                 className={classNames(styles.menuContainer, className, {

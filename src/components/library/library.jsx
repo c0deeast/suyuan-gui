@@ -224,6 +224,7 @@ class LibraryComponent extends React.Component {
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
+                <h1>hello world</h1>
                 {(this.props.filterable || this.props.tags) && (
                     <div className={styles.filterBar}>
                         {this.props.filterable && (

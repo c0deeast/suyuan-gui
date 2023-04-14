@@ -57,6 +57,7 @@ class DeviceLibrary extends React.PureComponent {
     }
     componentDidMount () {
         this.props.vm.extensionManager.getDeviceList().then(data => {
+            console.log("makeDeviceLibrary(data)",makeDeviceLibrary(data))
             this.props.onSetDeviceData(makeDeviceLibrary(data));
         })
             .catch(() => {

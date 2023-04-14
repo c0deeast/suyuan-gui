@@ -12,7 +12,6 @@ import {connect} from 'react-redux';
 import AccountNavComponent from '../components/menu-bar/account-nav.jsx';
 
 const AccountNav = function (props) {
-    console.log("hh")
     const {
         ...componentProps
     } = props;
