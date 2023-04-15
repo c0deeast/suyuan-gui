@@ -61,6 +61,7 @@ class DeviceLibrary extends React.PureComponent {
             this.props.onSetDeviceData(makeDeviceLibrary(data));
         })
             .catch(() => {
+                console.error("device-library fetch devices error")
                 this.props.onSetDeviceData(makeDeviceLibrary());
             });
     }
