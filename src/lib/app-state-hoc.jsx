@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Provider} from 'react-redux';
-import {createStore, combineReducers, compose} from 'redux';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, compose } from 'redux';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
-import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
+import localesReducer, { initLocale, localesInitialState } from '../reducers/locales';
 
-import {setPlayer, setFullScreen} from '../reducers/mode.js';
+import { setPlayer, setFullScreen } from '../reducers/mode.js';
 
 import locales from 'suyuan-l10n';
-import {detectLocale} from './detect-locale';
+import { detectLocale } from './detect-locale';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -24,7 +24,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
  */
 const AppStateHOC = function (WrappedComponent, localesOnly) {
     class AppStateWrapper extends React.Component {
-        constructor (props) {
+        constructor(props) {
             super(props);
             let initialState = {};
             let reducers = {};
@@ -38,8 +38,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             if (localesOnly) {
                 // Used for instantiating minimal state for the unsupported
                 // browser modal
-                reducers = {locales: localesReducer};
-                initialState = {locales: initializedLocales};
+                reducers = { locales: localesReducer };
+                initialState = { locales: initializedLocales };
                 enhancer = composeEnhancers();
             } else {
                 // You are right, this is gross. But it's necessary to avoid
@@ -53,24 +53,33 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initPlayer,
                     initTelemetryModal
                 } = guiRedux;
-                const {ScratchPaintReducer} = require('scratch-paint');
-
+                console.log("guiRedux",guiRedux);
+                const { ScratchPaintReducer } = require('scratch-paint');
+                console.log("guiInitialState",guiInitialState);
                 let initializedGui = guiInitialState;
+                // modal的初始数据
                 if (props.isFullScreen || props.isPlayerOnly) {
                     if (props.isFullScreen) {
+                        console.log("initFullScreen");
                         initializedGui = initFullScreen(initializedGui);
                     }
                     if (props.isPlayerOnly) {
+                        console.log("initPlayer");
                         initializedGui = initPlayer(initializedGui);
                     }
                 } else if (props.showTelemetryModal) {
+                    //猜测韬韬进入的这个分支
+                    console.log("initTelemetryModal");
                     initializedGui = initTelemetryModal(initializedGui);
+                } else {
+                    console.log("都没进");
                 }
                 reducers = {
                     locales: localesReducer,
                     scratchGui: guiReducer,
                     scratchPaint: ScratchPaintReducer
                 };
+                console.log("initializedGui", initializedGui)
                 initialState = {
                     locales: initializedLocales,
                     scratchGui: initializedGui
@@ -84,7 +93,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer
             );
         }
-        componentDidUpdate (prevProps) {
+        componentDidUpdate(prevProps) {
             if (localesOnly) return;
             if (prevProps.isPlayerOnly !== this.props.isPlayerOnly) {
                 this.store.dispatch(setPlayer(this.props.isPlayerOnly));
@@ -93,7 +102,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 this.store.dispatch(setFullScreen(this.props.isFullScreen));
             }
         }
-        render () {
+        render() {
             const {
                 isFullScreen, // eslint-disable-line no-unused-vars
                 isPlayerOnly, // eslint-disable-line no-unused-vars
