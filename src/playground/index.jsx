@@ -25,9 +25,12 @@ document.body.appendChild(appTarget);
 if (supportedBrowser()) {
     // require needed here to avoid importing unsupported browser-crashing code
     // at the top level
+    //韬韬走的这里？
     require('./render-gui.jsx').default(appTarget);
 
 } else {
+    // 看起来是用于支持浏览器？
+    console.log("playground/index.jsx");
     BrowserModalComponent.setAppElement(appTarget);
     const WrappedBrowserModalComponent = AppStateHOC(BrowserModalComponent, true /* localesOnly */);
     const handleBack = () => {};

@@ -465,7 +465,6 @@ class MenuBar extends React.Component {
         };
     }
     render() {
-        console.log("render")
         const saveNowMessage = (
             <FormattedMessage
                 defaultMessage="Save now"

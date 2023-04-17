@@ -53,9 +53,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initPlayer,
                     initTelemetryModal
                 } = guiRedux;
-                console.log("guiRedux",guiRedux);
+                console.log("props", props);
+                console.log("guiRedux", guiRedux);
                 const { ScratchPaintReducer } = require('scratch-paint');
-                console.log("guiInitialState",guiInitialState);
+                console.log("guiInitialState", guiInitialState);
                 let initializedGui = guiInitialState;
                 // modal的初始数据
                 if (props.isFullScreen || props.isPlayerOnly) {
@@ -69,6 +70,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     }
                 } else if (props.showTelemetryModal) {
                     //猜测韬韬进入的这个分支
+                    //问题就在这
                     console.log("initTelemetryModal");
                     initializedGui = initTelemetryModal(initializedGui);
                 } else {
