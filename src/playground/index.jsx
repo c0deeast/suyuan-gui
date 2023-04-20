@@ -30,7 +30,6 @@ if (supportedBrowser()) {
 
 } else {
     // 看起来是用于支持浏览器？
-    console.log("playground/index.jsx");
     BrowserModalComponent.setAppElement(appTarget);
     const WrappedBrowserModalComponent = AppStateHOC(BrowserModalComponent, true /* localesOnly */);
     const handleBack = () => {};

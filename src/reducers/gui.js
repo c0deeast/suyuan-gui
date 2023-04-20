@@ -37,7 +37,6 @@ import updateReducer, {updateInitialState} from './update';
 import decks from '../lib/libraries/decks/index.jsx';
 
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
-console.log("modalsInitialState",modalsInitialState)
 const guiInitialState = {
     alerts: alertsInitialState,
     assetDrag: assetDragInitialState,

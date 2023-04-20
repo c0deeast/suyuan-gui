@@ -57,7 +57,6 @@ const WrappedPlayer = compose(
     AppStateHOC,
     HashParserHOC
 )(ConnectedPlayer);
-console.log("playground/player.jsx")
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
 

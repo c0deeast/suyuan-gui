@@ -35,9 +35,6 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
         case OPEN_MODAL:
-            console.log("action.modal", Object.assign({}, state, {
-                [action.modal]: true
-            }))
             return Object.assign({}, state, {
                 [action.modal]: true
             });

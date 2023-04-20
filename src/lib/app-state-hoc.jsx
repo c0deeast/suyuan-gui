@@ -53,10 +53,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initPlayer,
                     initTelemetryModal
                 } = guiRedux;
-                console.log("props", props);
-                console.log("guiRedux", guiRedux);
                 const { ScratchPaintReducer } = require('scratch-paint');
-                console.log("guiInitialState", guiInitialState);
                 let initializedGui = guiInitialState;
                 // modal的初始数据
                 if (props.isFullScreen || props.isPlayerOnly) {
@@ -73,15 +70,12 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     //问题就在这
                     console.log("initTelemetryModal");
                     initializedGui = initTelemetryModal(initializedGui);
-                } else {
-                    console.log("都没进");
                 }
                 reducers = {
                     locales: localesReducer,
                     scratchGui: guiReducer,
                     scratchPaint: ScratchPaintReducer
                 };
-                console.log("initializedGui", initializedGui)
                 initialState = {
                     locales: initializedLocales,
                     scratchGui: initializedGui

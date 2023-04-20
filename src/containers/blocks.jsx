@@ -735,7 +735,6 @@ class Blocks extends React.Component {
             workspaceMetrics,
             ...props
         } = this.props;
-        console.log("deviceLibraryVisible",deviceLibraryVisible)
         /* eslint-enable no-unused-vars */
         return (
             <React.Fragment>
