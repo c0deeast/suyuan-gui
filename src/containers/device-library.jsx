@@ -96,6 +96,7 @@ class DeviceLibrary extends React.PureComponent {
     handleItemSelect (item) {
         this.requestLoadDevice(item);
         this.props.onRequestClose();
+        this.props.vm.runtime.setRealtimeMode(false)
     }
 
     render () {
