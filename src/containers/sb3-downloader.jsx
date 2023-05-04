@@ -45,11 +45,12 @@ class SB3Downloader extends React.Component {
 }
 
 const getProjectFilename = (curTitle, defaultTitle) => {
+    console.log("curTitle",curTitle,"defaultTitle",defaultTitle)
     let filenameTitle = curTitle;
     if (!filenameTitle || filenameTitle.length === 0) {
         filenameTitle = defaultTitle;
     }
-    return `${filenameTitle.substring(0, 100)}.ob`;
+    return `${filenameTitle.substring(0, 100)}.sb3`;
 };
 
 SB3Downloader.propTypes = {
