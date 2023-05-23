@@ -1,0 +1,7 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.tool-container * {
+    box-sizing: border-box;
+}
+

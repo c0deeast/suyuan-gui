@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import Box from '../box/box.jsx';
 import classNames from 'classnames';
 
-import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
+import { STAGE_SIZE_MODES } from '../../lib/layout-constants';
 import CodeEditor from '../../containers/code-editor.jsx';
 import HardwareConsole from '../../containers/hardware-console.jsx';
+import ToolContainer from '../../containers/tool-container.jsx';
 
 import styles from './hardware.css';
 
@@ -38,16 +39,21 @@ const HardwareComponent = props => {
                         src={isCodeEditorLocked ? lockIcon : unlockIcon}
                     />
                 </button>
-                <CodeEditor
-                    width={(stageSizeMode === STAGE_SIZE_MODES.large) ? 480 : 240}
-                    value={codeEditorValue}
-                    language={codeEditorLanguage}
-                    editorWillMount={onCodeEditorWillMount}
-                    editorDidMount={onCodeEditorDidMount}
-                    onChange={onCodeEditorChange}
-                    theme={codeEditorTheme}
-                    options={codeEditorOptions}
-                />
+                {
+                    props.codeEditorOrToolContainer === "codeEditor" ? <CodeEditor
+                        width={(stageSizeMode === STAGE_SIZE_MODES.large) ? 480 : 240}
+                        value={codeEditorValue}
+                        language={codeEditorLanguage}
+                        editorWillMount={onCodeEditorWillMount}
+                        editorDidMount={onCodeEditorDidMount}
+                        onChange={onCodeEditorChange}
+                        theme={codeEditorTheme}
+                        options={codeEditorOptions}
+                    /> : <ToolContainer
+                        width={(stageSizeMode === STAGE_SIZE_MODES.large) ? 480 : 240}
+                    />
+                }
+
             </Box>
             <Box
                 className={classNames(styles.hardwareConsoleWrapper,
@@ -75,6 +81,7 @@ HardwareComponent.propTypes = {
     codeEditorTheme: PropTypes.string,
     codeEditorValue: PropTypes.string,
     isCodeEditorLocked: PropTypes.bool,
+    codeEditorOrToolContainer: PropTypes.string,
     onCodeEditorWillMount: PropTypes.func,
     onCodeEditorDidMount: PropTypes.func,
     onCodeEditorChange: PropTypes.func,

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import classNames from 'classnames';
-import {defineMessages, FormattedMessage, intlShape} from 'react-intl';
+import { defineMessages, FormattedMessage, intlShape } from 'react-intl';
 
-import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
+import { STAGE_SIZE_MODES } from '../../lib/layout-constants';
 
 import styles from './hardware-header.css';
 
@@ -43,8 +43,19 @@ const HardwareHeaderComponent = props => {
         onSetStageSmall,
         onSetStageHide,
         onUpload,
-        stageSizeMode
+        stageSizeMode,
+        codeEditorOrToolContainer,
+        onSetContainerStatus
     } = props;
+
+    const handleChangeContainerStatus = () => {
+        if (codeEditorOrToolContainer === "codeEditor") {
+            onSetContainerStatus("toolContainer")
+        } else if (codeEditorOrToolContainer === "toolContainer") {
+            onSetContainerStatus("codeEditor")
+        }
+    }
+
     return (
         <Box
             className={classNames(
@@ -74,6 +85,7 @@ const HardwareHeaderComponent = props => {
                     />
                 </div>
             </div>
+            <Button onClick={() => handleChangeContainerStatus()}>isCodeEditor</Button>
             <div className={styles.stageSizeToggleGroup}>
                 <div>
                     <Button
@@ -134,10 +146,12 @@ const HardwareHeaderComponent = props => {
 
 HardwareHeaderComponent.propTypes = {
     intl: intlShape,
+    codeEditorOrToolContainer: PropTypes.string,
     onUpload: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageHide: PropTypes.func.isRequired,
+    onSetContainerStatus: PropTypes.func.isRequired,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES))
 };
 

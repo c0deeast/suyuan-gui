@@ -91,7 +91,8 @@ const mapStateToProps = state => ({
     codeEditorValue: state.scratchGui.code.codeEditorValue,
     deviceType: state.scratchGui.device.deviceType,
     isCodeEditorLocked: state.scratchGui.code.isCodeEditorLocked,
-    stageSizeMode: state.scratchGui.stageSize.stageSize
+    stageSizeMode: state.scratchGui.stageSize.stageSize,
+    codeEditorOrToolContainer:state.scratchGui.code.codeEditorOrToolContainer  //用于判断是代码编辑区还是工具区
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -648,6 +648,7 @@ class Blocks extends React.Component {
         } catch (e) {
             code = e.message;
         }
+        console.log("code",code)
         return code;
     }
     handleToolboxUploadFinish () {

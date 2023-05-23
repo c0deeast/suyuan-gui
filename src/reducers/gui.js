@@ -1,42 +1,43 @@
-import {applyMiddleware, compose, combineReducers} from 'redux';
-import alertsReducer, {alertsInitialState} from './alerts';
-import assetDragReducer, {assetDragInitialState} from './asset-drag';
-import cardsReducer, {cardsInitialState} from './cards';
-import colorPickerReducer, {colorPickerInitialState} from './color-picker';
-import connectionModalReducer, {connectionModalInitialState} from './connection-modal';
-import customProceduresReducer, {customProceduresInitialState} from './custom-procedures';
-import blockDragReducer, {blockDragInitialState} from './block-drag';
-import editorTabReducer, {editorTabInitialState} from './editor-tab';
-import hoveredTargetReducer, {hoveredTargetInitialState} from './hovered-target';
-import menuReducer, {menuInitialState} from './menus';
-import micIndicatorReducer, {micIndicatorInitialState} from './mic-indicator';
-import modalReducer, {modalsInitialState} from './modals';
-import modeReducer, {modeInitialState} from './mode';
-import monitorReducer, {monitorsInitialState} from './monitors';
-import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
-import projectChangedReducer, {projectChangedInitialState} from './project-changed';
-import projectStateReducer, {projectStateInitialState} from './project-state';
-import projectTitleReducer, {projectTitleInitialState} from './project-title';
-import fontsLoadedReducer, {fontsLoadedInitialState} from './fonts-loaded';
-import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
-import stageSizeReducer, {stageSizeInitialState} from './stage-size';
-import targetReducer, {targetsInitialState} from './targets';
-import timeoutReducer, {timeoutInitialState} from './timeout';
-import toolboxReducer, {toolboxInitialState} from './toolbox';
-import vmReducer, {vmInitialState} from './vm';
-import vmStatusReducer, {vmStatusInitialState} from './vm-status';
-import workspaceMetricsReducer, {workspaceMetricsInitialState} from './workspace-metrics';
+import { applyMiddleware, compose, combineReducers } from 'redux';
+import alertsReducer, { alertsInitialState } from './alerts';
+import assetDragReducer, { assetDragInitialState } from './asset-drag';
+import cardsReducer, { cardsInitialState } from './cards';
+import colorPickerReducer, { colorPickerInitialState } from './color-picker';
+import connectionModalReducer, { connectionModalInitialState } from './connection-modal';
+import customProceduresReducer, { customProceduresInitialState } from './custom-procedures';
+import blockDragReducer, { blockDragInitialState } from './block-drag';
+import editorTabReducer, { editorTabInitialState } from './editor-tab';
+import hoveredTargetReducer, { hoveredTargetInitialState } from './hovered-target';
+import menuReducer, { menuInitialState } from './menus';
+import micIndicatorReducer, { micIndicatorInitialState } from './mic-indicator';
+import modalReducer, { modalsInitialState } from './modals';
+import modeReducer, { modeInitialState } from './mode';
+import monitorReducer, { monitorsInitialState } from './monitors';
+import monitorLayoutReducer, { monitorLayoutInitialState } from './monitor-layout';
+import projectChangedReducer, { projectChangedInitialState } from './project-changed';
+import projectStateReducer, { projectStateInitialState } from './project-state';
+import projectTitleReducer, { projectTitleInitialState } from './project-title';
+import fontsLoadedReducer, { fontsLoadedInitialState } from './fonts-loaded';
+import restoreDeletionReducer, { restoreDeletionInitialState } from './restore-deletion';
+import stageSizeReducer, { stageSizeInitialState } from './stage-size';
+import targetReducer, { targetsInitialState } from './targets';
+import timeoutReducer, { timeoutInitialState } from './timeout';
+import toolboxReducer, { toolboxInitialState } from './toolbox';
+import vmReducer, { vmInitialState } from './vm';
+import vmStatusReducer, { vmStatusInitialState } from './vm-status';
+import workspaceMetricsReducer, { workspaceMetricsInitialState } from './workspace-metrics';
 import throttle from 'redux-throttle';
-import programModeReducer, {programModeInitialState} from './program-mode';
-import codeReducer, {codeInitialState} from './code';
-import deviceReducer, {deviceInitialState} from './device';
-import deviceDataReducer, {deviceDataInitialState} from './device-data';
-import hardwareConsoleReducer, {hardwareConsoleInitialState} from './hardware-console';
-import updateReducer, {updateInitialState} from './update';
+import programModeReducer, { programModeInitialState } from './program-mode';
+import codeReducer, { codeInitialState } from './code';
+import deviceReducer, { deviceInitialState } from './device';
+import deviceDataReducer, { deviceDataInitialState } from './device-data';
+import hardwareConsoleReducer, { hardwareConsoleInitialState } from './hardware-console';
+import updateReducer, { updateInitialState } from './update';
+import toolFormReducer, { toolFormState } from './tool-form';
 
 import decks from '../lib/libraries/decks/index.jsx';
 
-const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
+const guiMiddleware = compose(applyMiddleware(throttle(300, { leading: true, trailing: true })));
 const guiInitialState = {
     alerts: alertsInitialState,
     assetDrag: assetDragInitialState,
@@ -70,31 +71,36 @@ const guiInitialState = {
     vmStatus: vmStatusInitialState,
     workspaceMetrics: workspaceMetricsInitialState,
     programMode: programModeInitialState,
-    update: updateInitialState
+    update: updateInitialState,
+    toolForm:toolFormState
 };
 
 const initPlayer = function (currentState) {
     return Object.assign(
         {},
         currentState,
-        {mode: {
-            isFullScreen: currentState.mode.isFullScreen,
-            isPlayerOnly: true,
-            // When initializing in player mode, make sure to reset
-            // hasEverEnteredEditorMode
-            hasEverEnteredEditor: false
-        }}
+        {
+            mode: {
+                isFullScreen: currentState.mode.isFullScreen,
+                isPlayerOnly: true,
+                // When initializing in player mode, make sure to reset
+                // hasEverEnteredEditorMode
+                hasEverEnteredEditor: false
+            }
+        }
     );
 };
 const initFullScreen = function (currentState) {
     return Object.assign(
         {},
         currentState,
-        {mode: {
-            isFullScreen: true,
-            isPlayerOnly: currentState.mode.isPlayerOnly,
-            hasEverEnteredEditor: currentState.mode.hasEverEnteredEditor
-        }}
+        {
+            mode: {
+                isFullScreen: true,
+                isPlayerOnly: currentState.mode.isPlayerOnly,
+                hasEverEnteredEditor: currentState.mode.hasEverEnteredEditor
+            }
+        }
     );
 };
 
@@ -102,12 +108,14 @@ const initEmbedded = function (currentState) {
     return Object.assign(
         {},
         currentState,
-        {mode: {
-            showBranding: true,
-            isFullScreen: true,
-            isPlayerOnly: true,
-            hasEverEnteredEditor: false
-        }}
+        {
+            mode: {
+                showBranding: true,
+                isFullScreen: true,
+                isPlayerOnly: true,
+                hasEverEnteredEditor: false
+            }
+        }
     );
 };
 
@@ -171,6 +179,7 @@ const guiReducer = combineReducers({
     targets: targetReducer,
     timeout: timeoutReducer,
     toolbox: toolboxReducer,
+    toolForm:toolFormReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer,
     workspaceMetrics: workspaceMetricsReducer,
