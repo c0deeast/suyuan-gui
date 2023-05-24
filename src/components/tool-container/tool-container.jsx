@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import styles from './tool-container.css';
 
-const serailOptions = ['com3', 'com4']
+const serailOptions = ['com3', 'com13']
 
 const ToolContainerComponent = props => {
     const {
