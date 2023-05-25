@@ -25,7 +25,8 @@ class HardwareHeader extends React.Component {
     }
 
     handleUpload() {
-        console.log("peripheralName:",this.props.peripheralName)
+        console.log("peripheralName:", this.props.peripheralName)
+        console.log("formData:", { ...this.props.formData })
         if (this.props.peripheralName) {
             if (this.props.codeEditorOrToolContainer === 'codeEditor') {
                 const blocks = document.querySelector('.blocklyWorkspace .blocklyBlockCanvas');
@@ -36,8 +37,8 @@ class HardwareHeader extends React.Component {
                     this.props.onOpenUploadProgress();
                 }
             } else if (this.props.codeEditorOrToolContainer === 'toolContainer') {
-                console.log("serialValue:",this.props.serialValue)
-                this.props.vm.uploadToPeripheral(this.props.deviceId, JSON.stringify({ serialValue: this.props.serialValue }));
+                console.log("serialValue:", this.props.serialValue)
+                this.props.vm.uploadToPeripheral(this.props.deviceId, JSON.stringify({ ...this.props.formData }));
                 this.props.onOpenUploadProgress();
             }
         } else {
@@ -76,7 +77,7 @@ const mapStateToProps = state => ({
     peripheralName: state.scratchGui.connectionModal.peripheralName,
     stageSizeMode: state.scratchGui.stageSize.stageSize,
     codeEditorOrToolContainer: state.scratchGui.code.codeEditorOrToolContainer,
-    serialValue: state.scratchGui.toolForm.serialValue
+    formData: state.scratchGui.toolForm.formData
 });
 
 const mapDispatchToProps = dispatch => ({

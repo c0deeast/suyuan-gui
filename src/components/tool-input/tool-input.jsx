@@ -23,7 +23,7 @@ const ToolInputComponent = props => {
         <Box className={styles.numInpContainer}>
             <span style={{marginRight:"5px"}}>{prefix}</span>
             <button style={{ borderRadius: "4px 0px 0px 4px" }} className={styles.numInpBtn} onClick={handleDecrease}>-</button>
-            <InputNumber className={styles.numInp} readOnly={false} value={value} onChange={onChange} defaultValue={10} />
+            <InputNumber className={styles.numInp} readOnly={false} value={value} onChange={onChange} />
             <button style={{ borderRadius: "0px 4px 4px 0px" }} className={styles.numInpBtn} onClick={handleAdd}>+</button>
         </Box>
     )
