@@ -25,8 +25,8 @@ class HardwareHeader extends React.Component {
     }
 
     handleUpload() {
-        console.log("this.props.deviceId, this.props.codeEditorValue", this.props.deviceId, this.props.codeEditorValue,this.props.codeEditorOrToolContainer)
-        if (!this.props.peripheralName) {
+        console.log("peripheralName:",this.props.peripheralName)
+        if (this.props.peripheralName) {
             if (this.props.codeEditorOrToolContainer === 'codeEditor') {
                 const blocks = document.querySelector('.blocklyWorkspace .blocklyBlockCanvas');
                 if (blocks.getBBox().height === 0) {
@@ -36,6 +36,7 @@ class HardwareHeader extends React.Component {
                     this.props.onOpenUploadProgress();
                 }
             } else if (this.props.codeEditorOrToolContainer === 'toolContainer') {
+                console.log("serialValue:",this.props.serialValue)
                 this.props.vm.uploadToPeripheral(this.props.deviceId, JSON.stringify({ serialValue: this.props.serialValue }));
                 this.props.onOpenUploadProgress();
             }

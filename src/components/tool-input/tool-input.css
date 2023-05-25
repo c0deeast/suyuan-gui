@@ -1,0 +1,32 @@
+.num-inp-container {}
+
+.num-inp-container input{
+    width: 50px;
+    border: 1px solid rgb(220, 223, 230);
+    border-left: none;
+    border-right: none;
+    height: 32px;
+}
+
+.num-inp-container input:focus{
+    border: 1px solid rgb(94, 161, 255);
+}
+
+.num-inp-container input:focus-visible{
+    outline: none;
+}
+
+.num-inp-btn {
+    background-color: rgb(245, 247, 250);
+    border: 1px solid rgb(220, 223, 230);
+    height: 32px;
+    width: 32px;
+}
+
+.num-inp {
+    width: 50px;
+    display: inline-block;
+}
+.num-inp:focus-visible{
+    outline: none !important;
+}
