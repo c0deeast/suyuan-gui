@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { injectIntl } from 'react-intl';
 
 import ToolContainerComponent from '../components/tool-container/tool-container.jsx';
+import { toHexForm } from '../components/hardware-console/hardware-console.jsx';
 import {
     setSerialValue,
     setBaudrateValue,
@@ -37,6 +38,12 @@ class ToolContainer extends React.Component {
         };
     }
     componentDidMount() {
+        let data = this.props.isHexForm ? toHexForm(this.props.consoleArray) : new TextDecoder('utf-8').decode(this.props.consoleArray)
+        console.log("componentDidMountData:",data)
+        if (data) {
+            let { serialValue } = JSON.parse(data)
+            serialValue && this.props.setSerialValue(serialValue)
+        }
         window.addEventListener('resize', this.handleSize);
     }
 
@@ -102,6 +109,8 @@ ToolContainer.propTypes = {
     setCoordsRXValue: PropTypes.func,
     setCoordsRYValue: PropTypes.func,
     setCoordsRZValue: PropTypes.func,
+    consoleArray: PropTypes.object,
+    isHexForm:PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
@@ -119,6 +128,8 @@ const mapStateToProps = state => ({
     coordsRXValue: state.scratchGui.toolForm.formData.coordsRXValue,
     coordsRYValue: state.scratchGui.toolForm.formData.coordsRYValue,
     coordsRZValue: state.scratchGui.toolForm.formData.coordsRZValue,
+    consoleArray: state.scratchGui.hardwareConsole.consoleArray,
+    isHexForm: state.scratchGui.hardwareConsole.isHexForm,
 })
 
 const mapDispatchToProps = dispatch => ({

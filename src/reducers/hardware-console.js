@@ -3,42 +3,55 @@ const SET_EOL = 'scratch-gui/hardware-console/setEol';
 const SWITCH_HEXFORM = 'scratch-gui/hardware-console/switchHexForm';
 const SWITCH_AUTOSCROLL = 'scratch-gui/hardware-console/switchAutoScroll';
 const SWITCH_PAUSE = 'scratch-gui/hardware-console/switchPause';
+const SET_CONSOLEARRAY = 'scratch-gui/hardware-console/setConsoleArray';
 
 const initialState = {
     baudrate: '1200',
     eol: 'lfAndCr',
     isHexForm: false,
     isAutoScroll: true,
-    isPause: false
+    isPause: false,
+    consoleArray: new Uint8Array(0)
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SET_BUADRATE:
-        return Object.assign({}, state, {
-            baudrate: action.baudrate
-        });
-    case SET_EOL:
-        return Object.assign({}, state, {
-            eol: action.eol
-        });
-    case SWITCH_HEXFORM:
-        return Object.assign({}, state, {
-            isHexForm: !state.isHexForm
-        });
-    case SWITCH_AUTOSCROLL:
-        return Object.assign({}, state, {
-            isAutoScroll: !state.isAutoScroll
-        });
-    case SWITCH_PAUSE:
-        return Object.assign({}, state, {
-            isPause: !state.isPause
-        });
-    default:
-        return state;
+        case SET_CONSOLEARRAY:
+            return Object.assign({}, state, {
+                consoleArray: action.consoleArray
+            })
+        case SET_BUADRATE:
+            return Object.assign({}, state, {
+                baudrate: action.baudrate
+            });
+        case SET_EOL:
+            return Object.assign({}, state, {
+                eol: action.eol
+            });
+        case SWITCH_HEXFORM:
+            return Object.assign({}, state, {
+                isHexForm: !state.isHexForm
+            });
+        case SWITCH_AUTOSCROLL:
+            return Object.assign({}, state, {
+                isAutoScroll: !state.isAutoScroll
+            });
+        case SWITCH_PAUSE:
+            return Object.assign({}, state, {
+                isPause: !state.isPause
+            });
+        default:
+            return state;
     }
 };
+
+const setConsoleArray = function(consoleArray){
+    return {
+        type:SET_CONSOLEARRAY,
+        consoleArray
+    }
+}
 
 const setBaudrate = function (baudrate) {
     return {
@@ -79,5 +92,6 @@ export {
     setEol,
     switchHexForm,
     switchAutoScroll,
-    switchPause
+    switchPause,
+    setConsoleArray
 };

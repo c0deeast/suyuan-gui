@@ -1,7 +1,7 @@
 {
   "name": "suyuan-gui",
   "version": "0.1.1",
-  "description": "GraphicaL User Interface for creating and running Acrebot projects",
+  "description": "GraphicaL User Interface for creating and running AcrebotAI projects",
   "main": "./dist/scratch-gui.js",
   "scripts": {
     "build": "npm run clean && webpack --colors --bail",

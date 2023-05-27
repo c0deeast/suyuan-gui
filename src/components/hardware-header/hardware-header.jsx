@@ -45,7 +45,8 @@ const HardwareHeaderComponent = props => {
         onUpload,
         stageSizeMode,
         codeEditorOrToolContainer,
-        onSetContainerStatus
+        onSetContainerStatus,
+        onSend
     } = props;
 
     const handleChangeContainerStatus = () => {
@@ -55,6 +56,8 @@ const HardwareHeaderComponent = props => {
             onSetContainerStatus("codeEditor")
         }
     }
+
+
 
     return (
         <Box
@@ -86,6 +89,7 @@ const HardwareHeaderComponent = props => {
                 </div>
             </div>
             <Button onClick={() => handleChangeContainerStatus()}>isCodeEditor</Button>
+            <Button onClick={() => onSend()}>发送</Button>
             <div className={styles.stageSizeToggleGroup}>
                 <div>
                     <Button
@@ -148,11 +152,12 @@ HardwareHeaderComponent.propTypes = {
     intl: intlShape,
     codeEditorOrToolContainer: PropTypes.string,
     onUpload: PropTypes.func.isRequired,
+    onSend:PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageHide: PropTypes.func.isRequired,
     onSetContainerStatus: PropTypes.func.isRequired,
-    stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES))
+    stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
 };
 
 HardwareHeaderComponent.defaultProps = {

@@ -6,7 +6,7 @@
 [![Gitter](https://badges.gitter.im/openblockcc/community.svg)](https://gitter.im/openblockcc/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![ko-fi](https://img.shields.io/badge/donate-sponsors-ea4aaa.svg?logo=ko-fi)](https://ko-fi.com/X8X66DATO)
 
-**OpenBlock GUI is a set of React components that comprise the interface for creating and running Acrebot projects**
+**OpenBlock GUI is a set of React components that comprise the interface for creating and running AcrebotAI projects**
 
 ## Try OpenBlock Online
 

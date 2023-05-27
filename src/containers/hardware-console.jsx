@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {intlShape, injectIntl, defineMessages} from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 import VM from 'suyuan-vm';
 
 import HardwareConsoleComponent from '../components/hardware-console/hardware-console.jsx';
@@ -14,8 +14,8 @@ import {
     serialportMenuOpen
 } from '../reducers/menus';
 
-import {showAlertWithTimeout} from '../reducers/alerts';
-import {setBaudrate, setEol, switchHexForm, switchAutoScroll, switchPause} from '../reducers/hardware-console';
+import { showAlertWithTimeout } from '../reducers/alerts';
+import { setBaudrate, setEol, switchHexForm, switchAutoScroll, switchPause,setConsoleArray } from '../reducers/hardware-console';
 
 const messages = defineMessages({
     noLineTerminators: {
@@ -41,31 +41,31 @@ const messages = defineMessages({
 });
 
 const baudrateList = [
-    {key: '1200', value: 1200},
-    {key: '2400', value: 2400},
-    {key: '4800', value: 4800},
-    {key: '9600', value: 9600},
-    {key: '14400', value: 14400},
-    {key: '19200', value: 19200},
-    {key: '38400', value: 38400},
-    {key: '57600', value: 57600},
-    {key: '76800', value: 76800},
-    {key: '115200', value: 115200},
-    {key: '256000', value: 256000}
+    { key: '1200', value: 1200 },
+    { key: '2400', value: 2400 },
+    { key: '4800', value: 4800 },
+    { key: '9600', value: 9600 },
+    { key: '14400', value: 14400 },
+    { key: '19200', value: 19200 },
+    { key: '38400', value: 38400 },
+    { key: '57600', value: 57600 },
+    { key: '76800', value: 76800 },
+    { key: '115200', value: 115200 },
+    { key: '256000', value: 256000 }
 ];
 
 const eolList = [
-    {key: 'null', value: messages.noLineTerminators},
-    {key: 'lf', value: messages.lineFeed},
-    {key: 'cr', value: messages.carriageReturn},
-    {key: 'lfAndCr', value: messages.lfAndCr}
+    { key: 'null', value: messages.noLineTerminators },
+    { key: 'lf', value: messages.lineFeed },
+    { key: 'cr', value: messages.carriageReturn },
+    { key: 'lfAndCr', value: messages.lfAndCr }
 ];
 
 const MAX_CONSOLE_LENGTH = 32768;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class HardwareConsole extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         bindAll(this, [
             'handleClickClean',
@@ -82,31 +82,31 @@ class HardwareConsole extends React.Component {
             'writeToPeripheral'
         ]);
         this.state = {
-            consoleArray: new Uint8Array(0),
+            // consoleArray: new Uint8Array(0),
             dataToSend: ''
         };
         this._recivceBuffer = new Uint8Array(0);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.props.vm.addListener('PERIPHERAL_RECIVE_DATA', this.onReciveData);
         if (this.props.peripheralName) {
             this.props.vm.setPeripheralBaudrate(this.props.deviceId, parseInt(this.props.baudrate, 10));
         }
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         this.props.vm.removeListener('PERIPHERAL_RECIVE_DATA', this.onReciveData);
     }
 
-    appendBuffer (arr1, arr2) {
+    appendBuffer(arr1, arr2) {
         const arr = new Uint8Array(arr1.byteLength + arr2.byteLength);
         arr.set(arr1, 0);
         arr.set(arr2, arr1.byteLength);
         return arr;
     }
 
-    onReciveData (data) {
+    onReciveData(data) {
         if (this.props.isPause) {
             return;
         }
@@ -122,26 +122,28 @@ class HardwareConsole extends React.Component {
         // update the display per 0.1s
         if (!this._updateTimeoutID) {
             this._updateTimeoutID = setTimeout(() => {
-                this.setState({
-                    consoleArray: this._recivceBuffer
-                });
+                // this.setState({
+                //     consoleArray: this._recivceBuffer
+                // });
+                this.props.onSetConsoleArray(this._recivceBuffer)
                 this._updateTimeoutID = null;
             }, 50);
         }
     }
 
-    handleClickClean () {
+    handleClickClean() {
         this._recivceBuffer = new Uint8Array(0);
-        this.setState({
-            consoleArray: new Uint8Array(0)
-        });
+        // this.setState({
+        //     consoleArray: new Uint8Array(0)
+        // });
+        this.props.onSetConsoleArray(new Uint8Array(0))
     }
 
-    handleClickPause () {
+    handleClickPause() {
         this.props.onSwitchPause();
     }
 
-    handleKeyPress (e) {
+    handleKeyPress(e) {
         const keyCode = e.keyCode || e.which || e.charCode;
 
         // User pressed enter
@@ -150,7 +152,7 @@ class HardwareConsole extends React.Component {
         }
     }
 
-    handleKeyDown (e) {
+    handleKeyDown(e) {
         const keyCode = e.keyCode || e.which || e.charCode;
         const ctrlKey = e.ctrlKey || e.metaKey;
 
@@ -172,13 +174,13 @@ class HardwareConsole extends React.Component {
         }
     }
 
-    handleInputChange (e) {
+    handleInputChange(e) {
         this.setState({
             dataToSend: e.target.value
         });
     }
 
-    writeToPeripheral (data) {
+    writeToPeripheral(data) {
         if (this.props.peripheralName) {
             this.props.vm.writeToPeripheral(this.props.deviceId, data);
         } else {
@@ -186,21 +188,21 @@ class HardwareConsole extends React.Component {
         }
     }
 
-    handleClickSend () {
+    handleClickSend() {
         let data = this.state.dataToSend;
         if (this.props.eol === 'lf') {
             data = `${data}\n`;
-        } else if (this.props.eol === 'cr'){
+        } else if (this.props.eol === 'cr') {
 
             data = `${data}\r`;
-        } else if (this.props.eol === 'lfAndCr'){
+        } else if (this.props.eol === 'lfAndCr') {
 
             data = `${data}\r\n`;
         }
         this.writeToPeripheral(data);
     }
 
-    handleSelectBaudrate (e) {
+    handleSelectBaudrate(e) {
         if (this.props.peripheralName) {
             const index = e.target.selectedIndex;
             this.props.onSetBaudrate(baudrateList[index].key);
@@ -210,20 +212,20 @@ class HardwareConsole extends React.Component {
         }
     }
 
-    handleSelectEol (e) {
+    handleSelectEol(e) {
         const index = e.target.selectedIndex;
         this.props.onSetEol(eolList[index].key);
     }
 
-    handleClickHexForm () {
+    handleClickHexForm() {
         this.props.onSwitchHexForm();
     }
 
-    handleClickAutoScroll () {
+    handleClickAutoScroll() {
         this.props.onSwitchAutoScroll();
     }
 
-    render () {
+    render() {
         const {
             ...props
         } = this.props;
@@ -231,7 +233,7 @@ class HardwareConsole extends React.Component {
             <HardwareConsoleComponent
                 baudrate={this.props.baudrate}
                 baudrateList={baudrateList}
-                consoleArray={this.state.consoleArray}
+                consoleArray={this.props.consoleArray}
                 eol={this.props.eol}
                 eolList={eolList}
                 isAutoScroll={this.props.isAutoScroll}
@@ -261,6 +263,7 @@ HardwareConsole.propTypes = {
     baudrate: PropTypes.string.isRequired,
     deviceId: PropTypes.string.isRequired,
     eol: PropTypes.string.isRequired,
+    consoleArray:PropTypes.object.isRequired,
     handleClickSerialportMenu: PropTypes.func.isRequired,
     handleRequestSerialportMenu: PropTypes.func.isRequired,
     isAutoScroll: PropTypes.bool.isRequired,
@@ -287,6 +290,7 @@ const mapStateToProps = state => ({
     isPause: state.scratchGui.hardwareConsole.isPause,
     isRtl: state.locales.isRtl,
     peripheralName: state.scratchGui.connectionModal.peripheralName,
+    consoleArray:state.scratchGui.hardwareConsole.consoleArray,
     serialportMenuOpen: serialportMenuOpen(state)
 });
 
@@ -298,7 +302,8 @@ const mapDispatchToProps = dispatch => ({
     onSetEol: eol => dispatch(setEol(eol)),
     onSwitchAutoScroll: () => dispatch(switchAutoScroll()),
     onSwitchHexForm: () => dispatch(switchHexForm()),
-    onSwitchPause: () => dispatch(switchPause())
+    onSwitchPause: () => dispatch(switchPause()),
+    onSetConsoleArray:(consoleArray)=>dispatch(setConsoleArray(consoleArray))
 });
 
 export default compose(

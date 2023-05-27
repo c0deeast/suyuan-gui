@@ -28,8 +28,8 @@ const UnavailableStep = props => (
                     </div>
                     <div className={styles.helpStepText}>
                         <FormattedMessage
-                            defaultMessage="Make sure you have Acrebot Link installed and running"
-                            description="Message for getting Acrebot Link installed"
+                            defaultMessage="Make sure you have AcrebotAI Link installed and running"
+                            description="Message for getting AcrebotAI Link installed"
                             id="gui.connection.unavailable.installscratchlink"
                         />
                     </div>

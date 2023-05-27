@@ -20,25 +20,18 @@ class HardwareHeader extends React.Component {
     constructor(props) {
         super(props);
         bindAll(this, [
-            'handleUpload'
+            'handleUpload',
+            'handleSend'
         ]);
     }
 
     handleUpload() {
-        console.log("peripheralName:", this.props.peripheralName)
-        console.log("formData:", { ...this.props.formData })
         if (this.props.peripheralName) {
-            if (this.props.codeEditorOrToolContainer === 'codeEditor') {
-                const blocks = document.querySelector('.blocklyWorkspace .blocklyBlockCanvas');
-                if (blocks.getBBox().height === 0) {
-                    this.props.onWorkspaceIsEmpty();
-                } else {
-                    this.props.vm.uploadToPeripheral(this.props.deviceId, this.props.codeEditorValue);
-                    this.props.onOpenUploadProgress();
-                }
-            } else if (this.props.codeEditorOrToolContainer === 'toolContainer') {
-                console.log("serialValue:", this.props.serialValue)
-                this.props.vm.uploadToPeripheral(this.props.deviceId, JSON.stringify({ ...this.props.formData }));
+            const blocks = document.querySelector('.blocklyWorkspace .blocklyBlockCanvas');
+            if (blocks.getBBox().height === 0) {
+                this.props.onWorkspaceIsEmpty();
+            } else {
+                this.props.vm.uploadToPeripheral(this.props.deviceId, this.props.codeEditorValue);
                 this.props.onOpenUploadProgress();
             }
         } else {
@@ -46,6 +39,14 @@ class HardwareHeader extends React.Component {
         }
     }
 
+    handleSend() {
+        console.log("formdata:",this.props.formData)
+        if (this.props.peripheralName) {
+            this.props.vm.writeToPeripheral(this.props.deviceId, this.props.formData);
+        } else {
+            this.props.onNoPeripheralIsConnected();
+        }
+    }
     render() {
         const {
             ...props
@@ -53,6 +54,7 @@ class HardwareHeader extends React.Component {
         return (
             <HardwareHeaderComponent
                 onUpload={this.handleUpload}
+                onSend={this.handleSend}
                 {...props}
             />
         );

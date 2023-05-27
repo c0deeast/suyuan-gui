@@ -1,12 +1,12 @@
 import React from 'react';
-import {FormattedMessage, intlShape} from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ScrollableFeed from 'react-scrollable-feed';
 
 import Box from '../box/box.jsx';
 import MenuBarMenu from '../menu-bar/menu-bar-menu.jsx';
-import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import { MenuItem, MenuSection } from '../menu/menu.jsx';
 import styles from './hardware-console.css';
 import cleanIcon from './clean.svg';
 import settingIcon from './setting.svg';
@@ -233,3 +233,4 @@ HardwareConsoleComponent.propTypes = {
 };
 
 export default HardwareConsoleComponent;
+export { toHexForm }
