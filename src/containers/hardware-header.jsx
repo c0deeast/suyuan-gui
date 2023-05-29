@@ -40,9 +40,9 @@ class HardwareHeader extends React.Component {
     }
 
     handleSend() {
-        console.log("formdata:",this.props.formData)
+        console.log("stringify formdata:",JSON.stringify(this.props.formData),"deviceId:",this.props.deviceId)
         if (this.props.peripheralName) {
-            this.props.vm.writeToPeripheral(this.props.deviceId, this.props.formData);
+            this.props.vm.writeToPeripheral(this.props.deviceId,JSON.stringify(this.props.formData));
         } else {
             this.props.onNoPeripheralIsConnected();
         }
