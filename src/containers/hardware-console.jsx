@@ -107,6 +107,7 @@ class HardwareConsole extends React.Component {
     }
 
     onReciveData(data) {
+        console.log("执行VM监听函数:onReciveData")
         if (this.props.isPause) {
             return;
         }

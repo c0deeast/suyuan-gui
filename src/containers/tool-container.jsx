@@ -39,10 +39,12 @@ class ToolContainer extends React.Component {
     }
     componentDidMount() {
         let data = this.props.isHexForm ? toHexForm(this.props.consoleArray) : new TextDecoder('utf-8').decode(this.props.consoleArray)
-        console.log("componentDidMountData:",data)
-        if (data) {
-            let { serialValue } = JSON.parse(data)
-            serialValue && this.props.setSerialValue(serialValue)
+        console.log("componentDidMountData:", data, typeof data)
+        if (data && typeof data === 'string') {
+            let _data = JSON.parse(data)
+            if (_data && _data.serialValue) {
+                this.props.setSerialValue(serialValue)
+            }
         }
         window.addEventListener('resize', this.handleSize);
     }
@@ -110,7 +112,7 @@ ToolContainer.propTypes = {
     setCoordsRYValue: PropTypes.func,
     setCoordsRZValue: PropTypes.func,
     consoleArray: PropTypes.object,
-    isHexForm:PropTypes.bool,
+    isHexForm: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
