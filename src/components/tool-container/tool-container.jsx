@@ -8,13 +8,14 @@ import ToolSelectComponent from '../tool-select/tool-select.jsx';
 import styles from './tool-container.css';
 
 const serailOptions = ['com3', 'com13']
-const baudrateOptions = ['115200','1000000']
+const baudrateOptions = ['115200', '1000000']
 const ToolContainerComponent = props => {
     const {
         containerRef,
         width,
         height,
         serialValue,
+        baudrate,
         baudrateValue,
         angle1Value,
         angle2Value,
@@ -52,7 +53,7 @@ const ToolContainerComponent = props => {
                 <Box className={styles.leftContainer}>
                     <h2 className={styles.title}>工具</h2>
                     <ToolSelectComponent onChange={setSerialValue} value={serialValue} options={serailOptions} placeholder="选择串口" />
-                    <ToolSelectComponent onChange={setBaudrateValue} value={baudrateValue} options={baudrateOptions} placeholder="选择波特率" />
+                    <ToolSelectComponent onChange={setBaudrateValue} value={baudrate} options={baudrateOptions} placeholder="选择波特率" />
                 </Box>
                 <Box className={styles.rightContainer}>
                     <h2 className={styles.title}>快速移动</h2>
@@ -94,6 +95,7 @@ const ToolContainerComponent = props => {
 }
 
 ToolContainerComponent.propTypes = {
+    baudrate: PropTypes.string,
     serialValue: PropTypes.string,
     baudrateValue: PropTypes.string,
     angle1Value: PropTypes.number,

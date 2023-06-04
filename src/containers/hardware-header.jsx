@@ -84,13 +84,26 @@ class HardwareHeader extends React.Component {
         }
     }
 
-    handleSend() {
-        console.log("stringify formdata:",JSON.stringify(this.props.formData),"deviceId:",this.props.deviceId)
+    writeToPeripheral(data) {
         if (this.props.peripheralName) {
-            this.props.vm.writeToPeripheral(this.props.deviceId,JSON.stringify(this.props.formData));
+            this.props.vm.writeToPeripheral(this.props.deviceId, "");
         } else {
             this.props.onNoPeripheralIsConnected();
         }
+    }
+
+    handleSend() {
+        let data = this.props.formData;
+        if (this.props.eol === 'lf') {
+            data = `${data}\n`;
+        } else if (this.props.eol === 'cr') {
+
+            data = `${data}\r`;
+        } else if (this.props.eol === 'lfAndCr') {
+
+            data = `${data}\r\n`;
+        }
+        this.writeToPeripheral(data);
     }
     render() {
         const {
@@ -109,6 +122,7 @@ class HardwareHeader extends React.Component {
 HardwareHeader.propTypes = {
     codeEditorValue: PropTypes.string,
     deviceId: PropTypes.string,
+    eol: PropTypes.string.isRequired,
     onNoPeripheralIsConnected: PropTypes.func.isRequired,
     onOpenUploadProgress: PropTypes.func,
     onWorkspaceIsEmpty: PropTypes.func.isRequired,
@@ -121,6 +135,7 @@ HardwareHeader.propTypes = {
 const mapStateToProps = state => ({
     codeEditorValue: state.scratchGui.code.codeEditorValue,
     deviceId: state.scratchGui.device.deviceId,
+    eol: state.scratchGui.hardwareConsole.eol,
     peripheralName: state.scratchGui.connectionModal.peripheralName,
     stageSizeMode: state.scratchGui.stageSize.stageSize,
     codeEditorOrToolContainer: state.scratchGui.code.codeEditorOrToolContainer,

@@ -87,6 +87,7 @@ class ToolContainer extends React.Component {
 }
 
 ToolContainer.propTypes = {
+    baudrate:PropTypes.string,
     serialValue: PropTypes.string,
     baudrateValue: PropTypes.string,
     angle1Value: PropTypes.number,
@@ -120,6 +121,7 @@ ToolContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
+    baudrate: state.scratchGui.hardwareConsole.baudrate,
     serialValue: state.scratchGui.toolForm.formData.serialValue,
     baudrateValue: state.scratchGui.toolForm.formData.baudrateValue,
     angle1Value: state.scratchGui.toolForm.formData.angle1Value,
