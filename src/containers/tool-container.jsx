@@ -37,15 +37,19 @@ class ToolContainer extends React.Component {
             clientHeight: null
         };
     }
+    /**
+     * 输入数字后 会报错这一行 let _data = JSON.parse(data)代码
+     * 输入空格报错 报错这一行  this.props.setSerialValue(serialValue)
+     */
     componentDidMount() {
-        let data = this.props.isHexForm ? toHexForm(this.props.consoleArray) : new TextDecoder('utf-8').decode(this.props.consoleArray)
-        console.log("componentDidMountData:", data, typeof data)
-        if (data && typeof data === 'string') {
-            let _data = JSON.parse(data)
-            if (_data && _data.serialValue) {
-                this.props.setSerialValue(serialValue)
-            }
-        }
+        // let data = this.props.isHexForm ? toHexForm(this.props.consoleArray) : new TextDecoder('utf-8').decode(this.props.consoleArray)
+        // console.log("componentDidMountData:", data, typeof data)
+        // if (data && typeof data === 'string') {
+        //     let _data = JSON.parse(data)
+        //     if (_data && _data.serialValue) {
+        //         this.props.setSerialValue(_data.serialValue)
+        //     }
+        // }
         window.addEventListener('resize', this.handleSize);
     }
 
