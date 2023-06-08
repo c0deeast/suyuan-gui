@@ -21,53 +21,9 @@ class HardwareHeader extends React.Component {
         super(props);
         bindAll(this, [
             'handleUpload',
-            'handleSend'
+            'handleSend',
+            'writeToPeripheral'
         ]);
-        this._recivceBuffer = new Uint8Array(0);
-    }
-
-    componentDidMount() {
-        this.props.vm.addListener('PERIPHERAL_RECIVE_DATA', this.onReciveData);
-        // if (this.props.peripheralName) {
-        //     this.props.vm.setPeripheralBaudrate(this.props.deviceId, parseInt(this.props.baudrate, 10));
-        // }
-    }
-
-    componentWillUnmount(){
-        this.props.vm.removeListener('PERIPHERAL_RECIVE_DATA', this.onReciveData);
-    }
-
-    appendBuffer(arr1, arr2) {
-        const arr = new Uint8Array(arr1.byteLength + arr2.byteLength);
-        arr.set(arr1, 0);
-        arr.set(arr2, arr1.byteLength);
-        return arr;
-    }
-    
-    onReciveData(data) {
-        console.log("HardwareHeader执行VM监听函数")
-        if (this.props.isPause) {
-            return;
-        }
-
-        // limit data length to MAX_CONSOLE_LENGTH
-        if (this._recivceBuffer.byteLength + data.byteLength >= MAX_CONSOLE_LENGTH) {
-            this._recivceBuffer = this._recivceBuffer.slice(
-                this._recivceBuffer.byteLength + data.byteLength - MAX_CONSOLE_LENGTH);
-        }
-
-        this._recivceBuffer = this.appendBuffer(this._recivceBuffer, data);
-
-        // update the display per 0.1s
-        if (!this._updateTimeoutID) {
-            this._updateTimeoutID = setTimeout(() => {
-                // this.setState({
-                //     consoleArray: this._recivceBuffer
-                // });
-                this.props.onSetConsoleArray(this._recivceBuffer)
-                this._updateTimeoutID = null;
-            }, 50);
-        }
     }
 
     handleUpload() {
@@ -86,14 +42,15 @@ class HardwareHeader extends React.Component {
 
     writeToPeripheral(data) {
         if (this.props.peripheralName) {
-            this.props.vm.writeToPeripheral(this.props.deviceId, "");
+            this.props.vm.writeToPeripheral(this.props.deviceId, data);
         } else {
             this.props.onNoPeripheralIsConnected();
         }
     }
 
     handleSend() {
-        let data = this.props.formData;
+        console.log("formdata",this.props.formData)
+        let data = JSON.stringify(this.props.formData);
         if (this.props.eol === 'lf') {
             data = `${data}\n`;
         } else if (this.props.eol === 'cr') {

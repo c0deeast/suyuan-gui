@@ -182,6 +182,7 @@ class HardwareConsole extends React.Component {
     }
 
     writeToPeripheral(data) {
+        console.log("data:",data,typeof data)
         if (this.props.peripheralName) {
             this.props.vm.writeToPeripheral(this.props.deviceId, data);
         } else {

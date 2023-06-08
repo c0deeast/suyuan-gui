@@ -89,7 +89,16 @@ const HardwareHeaderComponent = props => {
                 </div>
             </div>
             <Button onClick={() => handleChangeContainerStatus()}>isCodeEditor</Button>
-            <Button onClick={() => onSend()}>发送</Button>
+            <button
+                className={classNames(styles.button, styles.sendButton)}
+                onClick={onSend}
+            >
+                <FormattedMessage
+                    defaultMessage="Send"
+                    description="Button in bottom to send data to serialport"
+                    id="gui.hardwareConsole.send"
+                />
+            </button>
             <div className={styles.stageSizeToggleGroup}>
                 <div>
                     <Button
@@ -152,7 +161,7 @@ HardwareHeaderComponent.propTypes = {
     intl: intlShape,
     codeEditorOrToolContainer: PropTypes.string,
     onUpload: PropTypes.func.isRequired,
-    onSend:PropTypes.func.isRequired,
+    onSend: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageHide: PropTypes.func.isRequired,

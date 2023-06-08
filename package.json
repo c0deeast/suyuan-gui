@@ -96,7 +96,7 @@
     "style-loader": "^0.23.0",
     "suyuan-blocks": "^0.1.12",
     "suyuan-l10n": "^3.10.13",
-    "suyuan-vm": "^0.1.11",
+    "suyuan-vm": "^0.1.12",
     "text-encoding": "0.7.0",
     "to-style": "1.3.3",
     "wav-encoder": "1.3.0",
