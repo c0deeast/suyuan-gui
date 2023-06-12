@@ -88,7 +88,7 @@ const HardwareHeaderComponent = props => {
                     />
                 </div>
             </div>
-            <Button onClick={() => handleChangeContainerStatus()}>isCodeEditor</Button>
+            {/* <Button onClick={() => handleChangeContainerStatus()}>isCodeEditor</Button>
             <button
                 className={classNames(styles.button, styles.sendButton)}
                 onClick={onSend}
@@ -98,7 +98,7 @@ const HardwareHeaderComponent = props => {
                     description="Button in bottom to send data to serialport"
                     id="gui.hardwareConsole.send"
                 />
-            </button>
+            </button> */}
             <div className={styles.stageSizeToggleGroup}>
                 <div>
                     <Button

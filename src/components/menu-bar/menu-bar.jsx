@@ -94,7 +94,7 @@ import communityIcon from './icon--community.svg';
 import wikiIcon from './icon--wiki.svg';
 
 import scratchLogo from './scratch-logo.png';
-
+import newHeaderLogo from './new-header-logo.jpg'
 import sharedMessages from '../../lib/shared-messages';
 
 import Switch from 'react-switch';
@@ -1027,7 +1027,7 @@ MenuBar.propTypes = {
 };
 
 MenuBar.defaultProps = {
-    logo: scratchLogo,
+    logo: newHeaderLogo,
     onShare: () => { }
 };
 
