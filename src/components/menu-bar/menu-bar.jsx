@@ -1027,7 +1027,7 @@ MenuBar.propTypes = {
 };
 
 MenuBar.defaultProps = {
-    logo: newHeaderLogo,
+    logo: scratchLogo,
     onShare: () => { }
 };
 
