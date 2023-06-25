@@ -68,37 +68,53 @@ const HardwareHeaderComponent = props => {
                 stageSizeMode === STAGE_SIZE_MODES.hide ? styles.hardwareHeaderWrapperStageHide : null
             )}
         >
-            <div className={styles.uploadGroup}>
-                <div
-                    className={classNames(
-                        styles.uploadButton,
-                    )}
-                    onClick={onUpload}
-                >
-                    <img
-                        alt={props.intl.formatMessage(messages.uploadMessage)}
-                        className={styles.uploadIcon}
-                        draggable={false}
-                        src={uploadIcon}
-                    />
-                    <FormattedMessage
-                        defaultMessage="Upload"
-                        description="Button to upload program"
-                        id="gui.hardwareHeader.upload"
-                    />
+            <Button onClick={() => handleChangeContainerStatus()}>
+                {
+                    codeEditorOrToolContainer === "codeEditor" ? <span>工具</span> : <span>代码编辑器</span>
+                }
+            </Button>
+            {
+                codeEditorOrToolContainer === "codeEditor" &&
+                <div className={styles.uploadGroup}>
+                    <div
+                        className={classNames(
+                            styles.uploadButton,
+                        )}
+                        onClick={onUpload}
+                    >
+                        <img
+                            alt={props.intl.formatMessage(messages.uploadMessage)}
+                            className={styles.uploadIcon}
+                            draggable={false}
+                            src={uploadIcon}
+                        />
+                        <FormattedMessage
+                            defaultMessage="Upload"
+                            description="Button to upload program"
+                            id="gui.hardwareHeader.upload"
+                        />
+                    </div>
                 </div>
-            </div>
-            {/* <Button onClick={() => handleChangeContainerStatus()}>isCodeEditor</Button>
-            <button
-                className={classNames(styles.button, styles.sendButton)}
-                onClick={onSend}
-            >
-                <FormattedMessage
-                    defaultMessage="Send"
-                    description="Button in bottom to send data to serialport"
-                    id="gui.hardwareConsole.send"
-                />
-            </button> */}
+            }
+            {
+                codeEditorOrToolContainer === "toolContainer" &&
+                <div className={styles.sendGroup}>
+
+                    <div
+                        className={classNames(
+                            styles.sendButton,
+                        )}
+                        onClick={onSend}
+                    >
+                        <FormattedMessage
+                            defaultMessage="Send"
+                            description="Button in bottom to send data to serialport"
+                            id="gui.hardwareConsole.send"
+                        />
+                    </div>
+                </div>
+            }
+
             <div className={styles.stageSizeToggleGroup}>
                 <div>
                     <Button

@@ -31,7 +31,8 @@
     width: 242px;
 }
 
-.upload-group{
+.upload-group,
+.send-group {
     display: flex;
 }
 
@@ -45,7 +46,8 @@
     display: flex;
 }
 
-.upload-button {
+.upload-button,
+.send-button {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -67,7 +69,7 @@
     font-weight: bold;
 }
 
-.upload-icon{
+.upload-icon {
     margin-right: 0.35rem;
     width: 16px;
     height: 16px;

@@ -42,7 +42,11 @@ const ToolContainerComponent = props => {
         setCoordsZValue,
         setCoordsRXValue,
         setCoordsRYValue,
-        setCoordsRZValue
+        setCoordsRZValue,
+        handleReadAngle,
+        handleReadCoords,
+        handleSendCoords,
+        handleSendAngle
     } = props;
     return (
         <Box
@@ -57,8 +61,12 @@ const ToolContainerComponent = props => {
                 </Box>
                 <Box className={styles.rightContainer}>
                     <h2 className={styles.title}>快速移动</h2>
-                    <div>
-                        <p>关节控制</p>
+                    <div className={styles.angleContainer}>
+                        <div className={styles.angleText}>
+                            <span className={styles.controlText}>关节控制：</span>
+                            <button onClick={handleReadAngle} className={styles.readAngle}>读取角度</button>
+                            <button onClick={handleSendAngle} className={styles.sendAngle}>发送角度</button>
+                        </div>
                         <div className={styles.control}>
                             <div style={{ marginRight: "8px" }}>
                                 <ToolInputComponent prefix="J1" value={angle1Value} setInputValue={setAngle1Value} />
@@ -74,7 +82,11 @@ const ToolContainerComponent = props => {
                         </div>
                     </div>
                     <div>
-                        <p>坐标控制</p>
+                        <div className={styles.coordsText}>
+                            <span className={styles.controlText}>坐标控制：</span>
+                            <button onClick={handleReadCoords} className={styles.readCoords}>读取坐标</button>
+                            <button onClick={handleSendCoords} className={styles.sendCoords}>发送坐标</button>
+                        </div>
                         <div className={styles.control}>
                             <div style={{ marginRight: "8px" }}>
                                 <ToolInputComponent prefix="x" value={coordsXValue} setInputValue={setCoordsXValue} />

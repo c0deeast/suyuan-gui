@@ -285,6 +285,7 @@ HardwareConsole.propTypes = {
 
 const mapStateToProps = state => ({
     baudrate: state.scratchGui.hardwareConsole.baudrate,
+    consoleArray:state.scratchGui.hardwareConsole.consoleArray,
     deviceId: state.scratchGui.device.deviceId,
     eol: state.scratchGui.hardwareConsole.eol,
     isAutoScroll: state.scratchGui.hardwareConsole.isAutoScroll,
@@ -292,7 +293,6 @@ const mapStateToProps = state => ({
     isPause: state.scratchGui.hardwareConsole.isPause,
     isRtl: state.locales.isRtl,
     peripheralName: state.scratchGui.connectionModal.peripheralName,
-    consoleArray:state.scratchGui.hardwareConsole.consoleArray,
     serialportMenuOpen: serialportMenuOpen(state)
 });
 
