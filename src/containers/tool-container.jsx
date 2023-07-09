@@ -206,6 +206,7 @@ ToolContainer.propTypes = {
     consoleArray: PropTypes.object,
     eol: PropTypes.string,
     isHexForm: PropTypes.bool,
+    peripheralName: PropTypes.string,
     serialValue: PropTypes.string,
     setSerialValue: PropTypes.func,
     setBaudrateValue: PropTypes.func,
@@ -241,6 +242,7 @@ const mapStateToProps = state => ({
     consoleArray: state.scratchGui.hardwareConsole.consoleArray,
     eol: state.scratchGui.hardwareConsole.eol,
     isHexForm: state.scratchGui.hardwareConsole.isHexForm,
+    peripheralName: state.scratchGui.connectionModal.peripheralName,
     serialValue: state.scratchGui.toolForm.formData.serialValue,
 })
 

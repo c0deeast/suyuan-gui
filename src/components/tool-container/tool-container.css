@@ -44,10 +44,13 @@
 }
 
 .read-angle:hover,
-.read-coords:hover {
+.read-coords:hover,
+.send-angle:hover,
+.send-coords:hover {
     background-color: rgb(103, 194, 58);
     color: #ffff;
 }
+
 /* 
 .control-text {
     margin-right: 10px;
