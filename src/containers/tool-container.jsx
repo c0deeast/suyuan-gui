@@ -5,6 +5,7 @@ import bindAll from 'lodash.bindall';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { injectIntl } from 'react-intl';
+import VM from 'suyuan-vm';
 
 import ToolContainerComponent from '../components/tool-container/tool-container.jsx';
 import { toHexForm } from '../components/hardware-console/hardware-console.jsx';
@@ -91,6 +92,7 @@ class ToolContainer extends React.Component {
     }
 
     writeToPeripheral(data) {
+        console.log("this.props",this.props.vm)
         if (this.props.peripheralName) {
             this.props.vm.writeToPeripheral(this.props.deviceId, data);
         } else {
@@ -222,6 +224,7 @@ ToolContainer.propTypes = {
     setCoordsRXValue: PropTypes.func,
     setCoordsRYValue: PropTypes.func,
     setCoordsRZValue: PropTypes.func,
+    vm: PropTypes.instanceOf(VM).isRequired
 }
 
 const mapStateToProps = state => ({

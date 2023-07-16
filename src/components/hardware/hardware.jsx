@@ -51,6 +51,7 @@ const HardwareComponent = props => {
                         options={codeEditorOptions}
                     /> : <ToolContainer
                         width={(stageSizeMode === STAGE_SIZE_MODES.large) ? 480 : 240}
+                        {...props}
                     />
                 }
 
