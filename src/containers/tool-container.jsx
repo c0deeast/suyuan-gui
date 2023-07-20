@@ -92,7 +92,6 @@ class ToolContainer extends React.Component {
     }
 
     writeToPeripheral(data) {
-        console.log("this.props",this.props.vm)
         if (this.props.peripheralName) {
             this.props.vm.writeToPeripheral(this.props.deviceId, data);
         } else {
@@ -183,7 +182,7 @@ class ToolContainer extends React.Component {
                 handleReadAngle={this.handleReadAngle}
                 handleReadCoords={this.handleReadCoords}
                 handleSendCoords={this.handleSendCoords}
-                handleSendAngle={this.handleSendCoords}
+                handleSendAngle={this.handleSendAngle}
                 {...props}
             />
         )
@@ -244,6 +243,7 @@ const mapStateToProps = state => ({
     coordsRZValue: state.scratchGui.toolForm.formData.coordsRZValue,
     consoleArray: state.scratchGui.hardwareConsole.consoleArray,
     eol: state.scratchGui.hardwareConsole.eol,
+    deviceId: state.scratchGui.device.deviceId,
     isHexForm: state.scratchGui.hardwareConsole.isHexForm,
     peripheralName: state.scratchGui.connectionModal.peripheralName,
     serialValue: state.scratchGui.toolForm.formData.serialValue,

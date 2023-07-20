@@ -13,11 +13,11 @@ const ToolInputComponent = props => {
     }
 
     const handleDecrease = () => {
-        setInputValue(--value)
+        setInputValue(value-1)
     }
 
     const handleAdd = () => {
-        setInputValue(++value)
+        setInputValue(value+1)
     }
     return (
         <Box className={styles.numInpContainer}>
