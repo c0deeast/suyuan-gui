@@ -1,5 +1,5 @@
-const UPDATE_SERIAL = 'scratch-gui/toolForm/UPDATE_SERIAL'
-const UPDATE_BAUDRATE = 'scratch-gui/toolForm/UPDATE_BAUDRATE'
+// const UPDATE_SERIAL = 'scratch-gui/toolForm/UPDATE_SERIAL'
+// const UPDATE_BAUDRATE = 'scratch-gui/toolForm/UPDATE_BAUDRATE'
 const UPDATE_ANGELE1 = 'scratch-gui/toolForm/UPDATE_ANGELE1'
 const UPDATE_ANGELE2 = 'scratch-gui/toolForm/UPDATE_ANGELE2'
 const UPDATE_ANGELE3 = 'scratch-gui/toolForm/UPDATE_ANGELE3'
@@ -15,8 +15,8 @@ const UPDATE_COORDSRZ = 'scratch-gui/toolForm/UPDATE_COORDSRZ'
 
 const initialState = {
     formData: {
-        serialValue: '',
-        baudrateValue: '',
+        // serialValue: '',
+        // baudrateValue: '',
         angle1Value: 0,
         angle2Value: 0,
         angle3Value: 0,
@@ -35,18 +35,18 @@ const initialState = {
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState
     switch (action.type) {
-        case UPDATE_SERIAL:
-            return {
-                formData: Object.assign({}, state.formData, {
-                    serialValue: action.value
-                })
-            }
-        case UPDATE_BAUDRATE:
-            return {
-                formData: Object.assign({}, state.formData, {
-                    baudrateValue: action.value
-                })
-            }
+        // case UPDATE_SERIAL:
+        //     return {
+        //         formData: Object.assign({}, state.formData, {
+        //             serialValue: action.value
+        //         })
+        //     }
+        // case UPDATE_BAUDRATE:
+        //     return {
+        //         formData: Object.assign({}, state.formData, {
+        //             baudrateValue: action.value
+        //         })
+        //     }
         case UPDATE_ANGELE1:
             return {
                 formData: Object.assign({}, state.formData, {
@@ -124,15 +124,15 @@ const reducer = function (state, action) {
     }
 }
 
-const setSerialValue = value => ({
-    type: UPDATE_SERIAL,
-    value: value
-})
+// const setSerialValue = value => ({
+//     type: UPDATE_SERIAL,
+//     value: value
+// })
 
-const setBaudrateValue = value => ({
-    type: UPDATE_BAUDRATE,
-    value: value
-})
+// const setBaudrateValue = value => ({
+//     type: UPDATE_BAUDRATE,
+//     value: value
+// })
 const setAngle1Value = value => ({
     type: UPDATE_ANGELE1,
     value: value
@@ -185,8 +185,8 @@ const setCoordsRZValue = value => ({
 export {
     reducer as default,
     initialState as toolFormState,
-    setSerialValue,
-    setBaudrateValue,
+    // setSerialValue,
+    // setBaudrateValue,
     setAngle1Value,
     setAngle2Value,
     setAngle3Value,

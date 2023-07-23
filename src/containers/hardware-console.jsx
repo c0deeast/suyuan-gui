@@ -15,7 +15,21 @@ import {
 } from '../reducers/menus';
 
 import { showAlertWithTimeout } from '../reducers/alerts';
-import { setBaudrate, setEol, switchHexForm, switchAutoScroll, switchPause,setConsoleArray } from '../reducers/hardware-console';
+import { setBaudrate, setEol, switchHexForm, switchAutoScroll, switchPause, setConsoleArray } from '../reducers/hardware-console';
+import {
+    setAngle1Value,
+    setAngle2Value,
+    setAngle3Value,
+    setAngle4Value,
+    setAngle5Value,
+    setAngle6Value,
+    setCoordsXValue,
+    setCoordsYValue,
+    setCoordsZValue,
+    setCoordsRXValue,
+    setCoordsRYValue,
+    setCoordsRZValue
+} from '../reducers/tool-form.js';
 
 const messages = defineMessages({
     noLineTerminators: {
@@ -79,7 +93,9 @@ class HardwareConsole extends React.Component {
             'handleSelectBaudrate',
             'handleSelectEol',
             'onReciveData',
-            'writeToPeripheral'
+            'writeToPeripheral',
+            'checkIsJSON',
+            'setAngle1Value',
         ]);
         this.state = {
             // consoleArray: new Uint8Array(0),
@@ -106,8 +122,35 @@ class HardwareConsole extends React.Component {
         return arr;
     }
 
+
     onReciveData(data) {
-        console.log("执行VM监听函数:onReciveData")
+        let receiveData = this.props.isHexForm ? toHexForm(data) : new TextDecoder('utf-8').decode(data)
+        console.log("执行VM监听函数:onReciveData", receiveData)
+        if (data && typeof data === 'string' && this.checkIsJSON(data)) {
+            let objData = JSON.parse(data)
+            if (objData.type === 'reply') {
+                switch (objData.act) {
+                    case 'rangle':
+                        this.setAngle1Value(objData.data[0])
+                        this.setAngle2Value(objData.data[1])
+                        this.setAngle3Value(objData.data[2])
+                        this.setAngle4Value(objData.data[3])
+                        this.setAngle5Value(objData.data[4])
+                        this.setAngle6Value(objData.data[5])
+                        break;
+                    case 'record':
+                        this.setCoordsXValue(objData.data[0])
+                        this.setCoordsYValue(objData.data[1])
+                        this.setCoordsZValue(objData.data[2])
+                        this.setCoordsRXValue(objData.data[3])
+                        this.setCoordsRYValue(objData.data[4])
+                        this.setCoordsRZValue(objData.data[5])
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         if (this.props.isPause) {
             return;
         }
@@ -130,6 +173,18 @@ class HardwareConsole extends React.Component {
                 this._updateTimeoutID = null;
             }, 50);
         }
+    }
+
+    checkIsJSON(str) {
+        try {
+            if (typeof JSON.parse(str) === "object") {
+                return true
+            }
+        } catch (e) {
+
+        }
+
+        return false
     }
 
     handleClickClean() {
@@ -182,7 +237,7 @@ class HardwareConsole extends React.Component {
     }
 
     writeToPeripheral(data) {
-        console.log("data:",data,typeof data)
+        console.log("data:", data, typeof data)
         if (this.props.peripheralName) {
             this.props.vm.writeToPeripheral(this.props.deviceId, data);
         } else {
@@ -265,7 +320,7 @@ HardwareConsole.propTypes = {
     baudrate: PropTypes.string.isRequired,
     deviceId: PropTypes.string.isRequired,
     eol: PropTypes.string.isRequired,
-    consoleArray:PropTypes.object.isRequired,
+    consoleArray: PropTypes.object.isRequired,
     handleClickSerialportMenu: PropTypes.func.isRequired,
     handleRequestSerialportMenu: PropTypes.func.isRequired,
     isAutoScroll: PropTypes.bool.isRequired,
@@ -279,13 +334,25 @@ HardwareConsole.propTypes = {
     onSwitchAutoScroll: PropTypes.func.isRequired,
     onSwitchHexForm: PropTypes.func.isRequired,
     onSwitchPause: PropTypes.func.isRequired,
+    setAngle1Value: PropTypes.func,
+    setAngle2Value: PropTypes.func,
+    setAngle3Value: PropTypes.func,
+    setAngle4Value: PropTypes.func,
+    setAngle5Value: PropTypes.func,
+    setAngle6Value: PropTypes.func,
+    setCoordsXValue: PropTypes.func,
+    setCoordsYValue: PropTypes.func,
+    setCoordsZValue: PropTypes.func,
+    setCoordsRXValue: PropTypes.func,
+    setCoordsRYValue: PropTypes.func,
+    setCoordsRZValue: PropTypes.func,
     peripheralName: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
     baudrate: state.scratchGui.hardwareConsole.baudrate,
-    consoleArray:state.scratchGui.hardwareConsole.consoleArray,
+    consoleArray: state.scratchGui.hardwareConsole.consoleArray,
     deviceId: state.scratchGui.device.deviceId,
     eol: state.scratchGui.hardwareConsole.eol,
     isAutoScroll: state.scratchGui.hardwareConsole.isAutoScroll,
@@ -305,7 +372,19 @@ const mapDispatchToProps = dispatch => ({
     onSwitchAutoScroll: () => dispatch(switchAutoScroll()),
     onSwitchHexForm: () => dispatch(switchHexForm()),
     onSwitchPause: () => dispatch(switchPause()),
-    onSetConsoleArray:(consoleArray)=>dispatch(setConsoleArray(consoleArray))
+    onSetConsoleArray: (consoleArray) => dispatch(setConsoleArray(consoleArray)),
+    setAngle1Value: (val) => dispatch(setAngle1Value(val)),
+    setAngle2Value: (val) => dispatch(setAngle2Value(val)),
+    setAngle3Value: (val) => dispatch(setAngle3Value(val)),
+    setAngle4Value: (val) => dispatch(setAngle4Value(val)),
+    setAngle5Value: (val) => dispatch(setAngle5Value(val)),
+    setAngle6Value: (val) => dispatch(setAngle6Value(val)),
+    setCoordsXValue: (val) => dispatch(setCoordsXValue(val)),
+    setCoordsYValue: (val) => dispatch(setCoordsYValue(val)),
+    setCoordsZValue: (val) => dispatch(setCoordsZValue(val)),
+    setCoordsRXValue: (val) => dispatch(setCoordsRXValue(val)),
+    setCoordsRYValue: (val) => dispatch(setCoordsRYValue(val)),
+    setCoordsRZValue: (val) => dispatch(setCoordsRZValue(val)),
 });
 
 export default compose(

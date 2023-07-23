@@ -14,9 +14,6 @@ const ToolContainerComponent = props => {
         containerRef,
         width,
         height,
-        serialValue,
-        baudrate,
-        baudrateValue,
         angle1Value,
         angle2Value,
         angle3Value,
@@ -29,8 +26,6 @@ const ToolContainerComponent = props => {
         coordsRXValue,
         coordsRYValue,
         coordsRZValue,
-        setSerialValue,
-        setBaudrateValue,
         setAngle1Value,
         setAngle2Value,
         setAngle3Value,
@@ -54,11 +49,11 @@ const ToolContainerComponent = props => {
             componentRef={containerRef}
         >
             <div style={{ width: `${width}px`, height: `${height}px`, backgroundColor: '#f9f9f9' }} className={styles.toolContent}>
-                <Box className={styles.leftContainer}>
+                {/* <Box className={styles.leftContainer}>
                     <h2 className={styles.title}>工具</h2>
                     <ToolSelectComponent onChange={setSerialValue} value={serialValue} options={serailOptions} placeholder="选择串口" />
                     <ToolSelectComponent onChange={setBaudrateValue} value={baudrate} options={baudrateOptions} placeholder="选择波特率" />
-                </Box>
+                </Box> */}
                 <Box className={styles.rightContainer}>
                     <h2 className={styles.title}>快速移动</h2>
                     <div className={styles.angleContainer}>
@@ -107,9 +102,6 @@ const ToolContainerComponent = props => {
 }
 
 ToolContainerComponent.propTypes = {
-    baudrate: PropTypes.string,
-    serialValue: PropTypes.string,
-    baudrateValue: PropTypes.string,
     angle1Value: PropTypes.number,
     angle2Value: PropTypes.number,
     angle3Value: PropTypes.number,
@@ -122,8 +114,6 @@ ToolContainerComponent.propTypes = {
     coordsRXValue: PropTypes.number,
     coordsRYValue: PropTypes.number,
     coordsRZValue: PropTypes.number,
-    setSerialValue: PropTypes.func,
-    setBaudrateValue: PropTypes.func,
     setAngle1Value: PropTypes.func,
     setAngle2Value: PropTypes.func,
     setAngle3Value: PropTypes.func,
