@@ -95,7 +95,6 @@ class HardwareConsole extends React.Component {
             'onReciveData',
             'writeToPeripheral',
             'checkIsJSON',
-            'setAngle1Value',
         ]);
         this.state = {
             // consoleArray: new Uint8Array(0),
